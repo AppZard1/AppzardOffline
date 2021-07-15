@@ -30,13 +30,13 @@ class Util {
     }
 
     if (Directory(appDataDir).existsSync()) {
-      final rushStorage = path.join(appDataDir, 'appzard');
+      final appzardDir = path.join(appDataDir, (os == 'linux' ? '.appzard' : 'appzard'));
       try {
-        Directory(rushStorage).createSync(recursive: true);
+        Directory(appzardDir).createSync(recursive: true);
       } catch (e) {
         return null;
       }
-      return rushStorage;
+      return appzardDir;
     } else {
       return null;
     }
