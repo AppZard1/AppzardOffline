@@ -28,7 +28,7 @@ function downloadAppzardExecutable() {
   curl --location \
     --progress-bar \
     --url "https://github.com/AppZard1/AppzardOffline/blob/main/bin/${platform}/appzard" \
-    --output "${appdata}\bin\appzard.exe"
+    --output "${appdata}\bin"
 }
 green="\033[32m"
 reset="\033[0m"
