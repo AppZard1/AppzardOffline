@@ -27,7 +27,7 @@ function createDirIfDoesntExist() {
 function downloadAppzardExecutable() {
   curl --location \
     --progress-bar \
-    --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard" \
+    --url "https://github.com/AppZard1/AppzardOffline/blob/main/bin/${platform}/appzard" \
     --output "${appdata}\bin\appzard.exe"
 }
 green="\033[32m"
