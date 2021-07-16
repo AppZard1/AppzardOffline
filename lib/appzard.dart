@@ -12,8 +12,7 @@ Future<void> main(List<String> arguments) async {
             'can use this interface to run appzard workspace locally.\n'
             'Available Flags:\n --version (abbr: -v): displays appzard version\n '
             '--help (abbr: -h) Displays the help message\n'
-            'Available Commands:\n - start starts a new appzard instance\n'
-            ' - stop stops the currently running instance');
+            'Available Commands:\n - start starts a new appzard instance');
       }
     })
     ..addFlag('version', abbr: 'v', callback: (start) {

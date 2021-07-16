@@ -12,10 +12,9 @@ function resolvePlatform() {
 }
 function resolveAppDataFolder() {
     if [ $platform == "windows" ]; then
-        appdata="$APPDATA\appzard"
+        appdata="$APPDATA/appzard"
     elif [ $platform = "MAC" ]; then
-        appdata="$HOME/Library/Application/"
-                + "Appzard"
+        appdata="$HOME/Library/Application/Appzard"
     elif [ $platform == "linux" ]; then
         appdata="$HOME/.appzard"
     fi
@@ -29,27 +28,27 @@ function downloadAppzardExecutable() {
   curl --location \
     --progress-bar \
     --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard" \
-    --output "${appdata}\bin\appzard.exe"
+    --output "${appdata}/bin/appzard.exe"
 }
 function downloadAppengine() {
   curl --location \
     --progress-bar \
     --url "$1" \
-    --output "${appdata}\deps\appengine.zip"
+    --output "${appdata}/deps/appengine.zip"
 }
 function downloadAppengineLibraries() {
   curl --location \
     --progress-bar \
     --url "$1" \
-    --output "${appdata}\deps\appengine-lib.zip"
+    --output "${appdata}/deps/appengine-lib.zip"
 }
 function unpackAppengineFiles() {
     # Unzip the downloaded files
-    unzip -o -q "${appdata}\deps\appengine.zip" -d "${appdata}\deps"
-    unzip -o -q "${appdata}\deps\appengine-lib.zip" -d "${appdata}\deps\appengine"
+    unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
+    unzip -o -q "${appdata}/deps/appengine-lib.zip" -d "${appdata}/deps/appengine"
     # So we don't take a large space
-    rm "${appdata}\deps\appengine.zip"
-    rm "${appdata}\deps\appengine-lib.zip"
+    rm "${appdata}/deps/appengine.zip"
+    rm "${appdata}/deps/appengine-lib.zip"
 }
 green="\033[32m"
 yellow="\033[33m"
@@ -60,8 +59,8 @@ resolvePlatform
 resolveAppDataFolder
 appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
 appengineLibDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine-lib.json" | sed "s/\"//g")
-createDirIfDoesntExist "${appdata}\bin"
-createDirIfDoesntExist "${appdata}\deps"
+createDirIfDoesntExist "${appdata}/bin"
+createDirIfDoesntExist "${appdata}/deps"
 echo "Downloading Appzard executable.."
 downloadAppzardExecutable
 echo -e "${green}Done!${reset}"
@@ -75,4 +74,4 @@ echo -e "${green}Done!${reset}"
 echo "Unpacking files.."
 unpackAppengineFiles
 echo -e "${green}Done!${reset}"
-echo -e "${yellow}Appzard has been successfully installed on your device! Please add this path: ${appdata}\bin to your PATH environment variable, then run appzard -v to verify the installation.${reset}"
+echo -e "${yellow}Appzard has been successfully installed on your device! Please add this path: ${appdata}/bin to your PATH environment variable, then run appzard -v to verify the installation.${reset}"
