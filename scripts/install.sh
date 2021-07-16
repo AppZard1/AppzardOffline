@@ -2,6 +2,7 @@
 set -e
 platform="unknown"
 appdata=""
+bindir=""
 function resolvePlatform() {
     case "$OSTYPE" in
       darwin*)  platform="mac" ;;
@@ -28,7 +29,7 @@ function downloadAppzardExecutable() {
   curl --location \
     --progress-bar \
     --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard" \
-    --output "${appdata}/bin/appzard.exe"
+    --output "${bindir}/appzard.exe"
 }
 function downloadAppengine() {
   curl --location \
@@ -59,7 +60,9 @@ resolvePlatform
 resolveAppDataFolder
 appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
 appengineLibDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine-lib.json" | sed "s/\"//g")
-createDirIfDoesntExist "${appdata}/bin"
+bindir="$HOME/.appzard/bin"
+createDirIfDoesntExist "$HOME/.appzard"
+createDirIfDoesntExist "${bindir}"
 createDirIfDoesntExist "${appdata}/deps"
 echo "Downloading Appzard executable.."
 downloadAppzardExecutable
@@ -74,4 +77,4 @@ echo -e "${green}Done!${reset}"
 echo "Unpacking files.."
 unpackAppengineFiles
 echo -e "${green}Done!${reset}"
-echo -e "${yellow}Appzard has been successfully installed on your device! Please add this path: ${appdata}/bin to your PATH environment variable, then run appzard -v to verify the installation.${reset}"
+echo -e "${yellow}Appzard has been successfully installed on your device! Please add this path: ${bindir} to your PATH environment variable, then run appzard -v to verify the installation.${reset}"
