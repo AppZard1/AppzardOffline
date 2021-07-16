@@ -32,7 +32,7 @@ Future<void> main(List<String> arguments) async {
         Util.checkIfAppzardIsRunning().then((value) =>
             print("Appzard is running!"));
         io.Process.run(path.join(
-            Util.dataDir()!, 'deps', 'appengine-java-sdk-1.9.76', 'bin',
+            Util.dataDir()!, 'deps', 'appengine', 'bin',
             'dev_appserver.cmd'), [
           '--port=8888',
           '--address=0.0.0.0',

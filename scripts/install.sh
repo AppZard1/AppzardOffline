@@ -29,7 +29,7 @@ function downloadAppzardExecutable() {
   curl --location \
     --progress-bar \
     --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard" \
-    --output "${bindir}/appzard.exe"
+    --output "${bindir}/appzard"
 }
 function downloadAppengine() {
   curl --location \
@@ -43,13 +43,21 @@ function downloadAppengineLibraries() {
     --url "$1" \
     --output "${appdata}/deps/appengine-lib.zip"
 }
-function unpackAppengineFiles() {
+function downloadBuildFiles() {
+  curl --location \
+    --progress-bar \
+    --url "$1" \
+    --output "${appdata}/deps/build.zip"
+}
+function unpackFiles() {
     # Unzip the downloaded files
     unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
     unzip -o -q "${appdata}/deps/appengine-lib.zip" -d "${appdata}/deps/appengine"
+    unzip -o -q "${appdata}/deps/build.zip" -d "${appdata}/deps/build"
     # So we don't take a large space
     rm "${appdata}/deps/appengine.zip"
     rm "${appdata}/deps/appengine-lib.zip"
+    rm "${appdata}/deps/build.zip"
 }
 green="\033[32m"
 yellow="\033[33m"
@@ -59,6 +67,7 @@ echo "Starting Appzard installation.."
 resolvePlatform
 resolveAppDataFolder
 appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
+buildDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
 appengineLibDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine-lib.json" | sed "s/\"//g")
 bindir="$HOME/.appzard/bin"
 createDirIfDoesntExist "$HOME/.appzard"
@@ -74,7 +83,10 @@ echo -e "${green}Done!${reset}"
 echo "Downloading appengine java SDK libraries.."
 downloadAppengineLibraries "${appengineLibDownloadUrl}"
 echo -e "${green}Done!${reset}"
+echo "Downloading Build files.."
+downloadBuildFiles "${buildDownloadUrl}"
+echo -e "${green}Done!${reset}"
 echo "Unpacking files.."
-unpackAppengineFiles
+unpackFiles
 echo -e "${green}Done!${reset}"
 echo -e "${yellow}Appzard has been successfully installed on your device! Please add this path: ${bindir} to your PATH environment variable, then run appzard -v to verify the installation.${reset}"
