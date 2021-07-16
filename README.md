@@ -1,1 +1,1 @@
-A simple command-line application.
+A command line tool to run appzard locally.
