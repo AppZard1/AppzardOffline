@@ -16,6 +16,9 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   ### - `start`
   Syntax: `appzard start`
   Starts a new appzard instance, you must not have a previous session running or have a program using 8888 port or `localhost`.
+## Available Arguments:
+  - `--version` (abbr: `-v`): Displays appzard's version
+  - `--help` (abbr: `-h`): Displays the help message
 ## Upgrading
   Upgrades are periocially released for this service, to upgrade appzard to the latest version, please run:
   ```
