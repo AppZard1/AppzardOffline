@@ -42,10 +42,10 @@ Future<void> main(List<String> arguments) async {
         path.join(Util.getAppDataDir()!, "deps", "build", "war")
       ]);
     }
-  } else if (command == null) {
+  } else if (command == null && result.arguments.isEmpty) {
     print('Welcome to appzard offline version! Please run appzard -h for more details.');
   } else {
-    printError('Unknown command: ' + command + '. Please run appzard -h for the available commands.');
+    printError('Unknown command: ' + command! + '. Please run appzard -h for the available commands.');
   }
 }
 
