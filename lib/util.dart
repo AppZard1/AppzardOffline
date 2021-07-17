@@ -90,4 +90,15 @@ class Util {
       printError('Failed to automatically open appzard\'s instance url, please navigate to http://localhost:8888 manually from your browser.');
     }
   }
+
+  static String getAppengineDevAppserverScript() {
+    var scriptPath = path.join(getAppDataDir()!, 'deps', 'appengine', 'bin');
+    // should we use the command prompt script or the shell script?
+    if (Platform.isWindows) {
+      scriptPath = path.join(scriptPath, 'dev_appserver.cmd');
+    } else {
+      scriptPath = path.join(scriptPath, 'dev_appserver.sh');
+    }
+    return scriptPath;
+  }
 }

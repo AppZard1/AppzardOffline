@@ -3,7 +3,7 @@ set -e
 platform="unknown"
 appdata=""
 bindir=""
-function resolvePlatform() {
+function resolvePlatform {
     case "$OSTYPE" in
       darwin*)  platform="mac" ;;
       linux*)   platform="linux" ;;
@@ -11,7 +11,7 @@ function resolvePlatform() {
       *)        echo "The platform type: $OSTYPE couldn't be resolved as a valid platform!" && exit 1 ;;
     esac
 }
-function resolveAppDataFolder() {
+function resolveAppDataFolder {
     if [ $platform == "windows" ]; then
         appdata="$APPDATA/appzard"
     elif [ $platform = "MAC" ]; then
@@ -20,36 +20,42 @@ function resolveAppDataFolder() {
         appdata="$HOME/.appzard"
     fi
 }
-function createDirIfDoesntExist() {
+function createDirIfDoesntExist {
     if [ ! -d "$1" ]; then
       mkdir "$1"
     fi
 }
-function downloadAppzardExecutable() {
+function downloadAppzardExecutable {
   curl --location \
     --progress-bar \
     --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard" \
     --output "${bindir}/appzard"
 }
-function downloadAppengine() {
+function downloadAppengine {
   curl --location \
     --progress-bar \
     --url "$1" \
     --output "${appdata}/deps/appengine.zip"
 }
-function downloadAppengineLibraries() {
+function downloadAppengineLibraries {
   curl --location \
     --progress-bar \
     --url "$1" \
     --output "${appdata}/deps/appengine-lib.zip"
 }
-function downloadBuildFiles() {
+function downloadBuildFiles {
   curl --location \
     --progress-bar \
     --url "$1" \
     --output "${appdata}/deps/build.zip"
 }
-function unpackFiles() {
+function downloadUpgradeScript() {
+    curl --location \
+    --progress-bar \
+    --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/scripts/upgrade.sh" \
+    --output "${appdata}/scripts/upgrade.sh"
+}
+function unpackFiles {
     # Unzip the downloaded files
     unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
     unzip -o -q "${appdata}/deps/appengine-lib.zip" -d "${appdata}/deps/appengine"
@@ -73,6 +79,7 @@ bindir="$HOME/.appzard/bin"
 createDirIfDoesntExist "$HOME/.appzard"
 createDirIfDoesntExist "${bindir}"
 createDirIfDoesntExist "${appdata}/deps"
+createDirIfDoesntExist "${appdata}/scripts"
 echo "Downloading Appzard executable.."
 downloadAppzardExecutable
 echo -e "${green}Done!${reset}"
@@ -85,6 +92,9 @@ downloadAppengineLibraries "${appengineLibDownloadUrl}"
 echo -e "${green}Done!${reset}"
 echo "Downloading Build files.."
 downloadBuildFiles "${buildDownloadUrl}"
+echo -e "${green}Done!${reset}"
+echo "Downloading Upgrade Script.."
+downloadUpgradeScript
 echo -e "${green}Done!${reset}"
 echo "Unpacking files.."
 unpackFiles

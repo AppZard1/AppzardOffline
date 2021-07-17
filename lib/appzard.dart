@@ -23,25 +23,29 @@ Future<void> main(List<String> arguments) async {
   argParser.addCommand('start');
 
   final result = argParser.parse(arguments);
-  if (Util.getCommand(result) == 'start') {
-      print('Starting Appzard..');
-      var val = await Util.isAppzardRunning();
-      if (val) {
-        printError('An appzard instance is already running!');
-        io.exit(0);
-      } else {
-        Util.checkIfAppzardIsRunning().then((value) =>
-            printGreen("Appzard is running!"));
-            Util.openUrl("http://localhost:8888");
-            printWarning("You are being redirected to appzard's local instance url, in case it doesn't start, please navigate manually to http://localhost:8888");
-        io.Process.run(path.join(
-            Util.getAppDataDir()!, 'deps', 'appengine', 'bin',
-            'dev_appserver.cmd'), [
-          '--port=8888',
-          '--address=0.0.0.0',
-          path.join(Util.getAppDataDir()!, "deps", "build", "war")
-        ]);
-      }
+  final command = Util.getCommand(result);
+  if (command == 'start') {
+    print('Starting Appzard..');
+    var val = await Util.isAppzardRunning();
+    if (val) {
+      printError('An appzard instance is already running!');
+      io.exit(0);
+    } else {
+      Util.checkIfAppzardIsRunning().then((value) =>
+          printGreen('Appzard is running!'));
+      Util.openUrl('http://localhost:8888');
+      printWarning(
+          "You are being redirected to appzard's local instance url, in case it doesn't start, please navigate manually to http://localhost:8888");
+      io.Process.run(Util.getAppengineDevAppserverScript(), [
+        '--port=8888',
+        '--address=0.0.0.0',
+        path.join(Util.getAppDataDir()!, "deps", "build", "war")
+      ]);
+    }
+  } else if (command == null) {
+    print('Welcome to appzard offline version! Please run appzard -h for more details.');
+  } else {
+    printError('Unknown command: ' + command + '. Please run appzard -h for the available commands.');
   }
 }
 
