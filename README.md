@@ -5,7 +5,7 @@ You can install appzard on your device by:
 - Opening a new terminal and running:
  
 ```
-curl https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/scripts/install.sh | bash
+curl -s https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/scripts/install.sh | bash
 ```
 And wait for the installation to finish.
 After the installation is complete you should get a simmilar message:
