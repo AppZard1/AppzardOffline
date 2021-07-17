@@ -5,7 +5,6 @@ appdata=""
 bindir=""
 function resolvePlatform {
     case "$OSTYPE" in
-      darwin*)  platform="mac" ;;
       linux*)   platform="linux" ;;
       msys*)    platform="windows" ;;
       *)        echo "The platform type: $OSTYPE couldn't be resolved as a valid platform!" && exit 1 ;;
@@ -78,6 +77,10 @@ appengineLibDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebasei
 bindir="$HOME/.appzard/bin"
 createDirIfDoesntExist "$HOME/.appzard"
 createDirIfDoesntExist "${bindir}"
+<<<<<<< HEAD
+createDirIfDoesntExist "${appdata}"
+=======
+>>>>>>> d68813398f2371a4daf5be79a48c27522574585a
 createDirIfDoesntExist "${appdata}/deps"
 createDirIfDoesntExist "${appdata}/scripts"
 echo "Downloading Appzard executable.."
