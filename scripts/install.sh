@@ -53,7 +53,7 @@ function unpackFiles() {
     # Unzip the downloaded files
     unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
     unzip -o -q "${appdata}/deps/appengine-lib.zip" -d "${appdata}/deps/appengine"
-    unzip -o -q "${appdata}/deps/build.zip" -d "${appdata}/deps/build"
+    unzip -o -q "${appdata}/deps/build.zip" -d "${appdata}/deps"
     # So we don't take a large space
     rm "${appdata}/deps/appengine.zip"
     rm "${appdata}/deps/appengine-lib.zip"

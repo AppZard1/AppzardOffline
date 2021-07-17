@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:appzard/appzard.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:args/args.dart';
 
 class Util {
 
-  static String? dataDir() {
+  static String? getAppDataDir() {
     var os = Platform.operatingSystem;
     late String appDataDir;
 
@@ -65,5 +66,28 @@ class Util {
       }
     }
     return Future.value(true);
+  }
+
+  static void openUrl(String url) {
+    var fail = false;
+    switch (Platform.operatingSystem) {
+      case 'linux':
+        Process.run('x-www-browser', [url]);
+        break;
+      case 'macos':
+        Process.run('open', [url]);
+        break;
+      case 'windows':
+        Process.run('explorer', [url]);
+        break;
+      default:
+        fail = true;
+        break;
+    }
+
+    if (fail) {
+      // should never happen
+      printError('Failed to automatically open appzard\'s instance url, please navigate to http://localhost:8888 manually from your browser.');
+    }
   }
 }
