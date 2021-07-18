@@ -18,12 +18,6 @@ function downloadAppengine {
     --url "$1" \
     --output "${appdata}/deps/appengine.zip"
 }
-function downloadAppengineLibraries {
-  curl --location \
-    --progress-bar \
-    --url "$1" \
-    --output "${appdata}/deps/appengine-lib.zip"
-}
 function downloadBuildFiles {
   curl --location \
     --progress-bar \
@@ -42,7 +36,6 @@ then
   latestVersion=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/version.json" | sed "s/\"//g")
   appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
   buildDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
-  appengineLibDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine-lib.json" | sed "s/\"//g")
   buildserverDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
   echo "Your current appzard version is ${currentVersion}"
   echo "The latest appzard version is ${latestVersion}"
@@ -81,15 +74,9 @@ then
         echo "Downloading Appengine java SDK.."
         downloadAppengine "${appengineDownloadUrl}"
         echo -e "${green}Done!${reset}"
-        # We host this separately instead of right using one compressed zip ( which is how it's served by google), to make the archives smaller.
-        echo "Downloading appengine java SDK libraries.."
-        downloadAppengineLibraries "${appengineLibDownloadUrl}"
-        echo -e "${green}Done!${reset}"
         echo "Unpacking files.."
         unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
-        unzip -o -q "${appdata}/deps/appengine-lib.zip" -d "${appdata}/deps/appengine"
         rm "${appdata}/deps/appengine.zip"
-        rm "${appdata}/deps/appengine-lib.zip"
         echo -e "${green}Done!${reset}"
       fi
       buildFilesUpdated=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildFilesUpdated.json" | sed "s/\"//g")

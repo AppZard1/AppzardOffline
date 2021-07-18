@@ -36,12 +36,6 @@ function downloadAppengine {
     --url "$1" \
     --output "${appdata}/deps/appengine.zip"
 }
-function downloadAppengineLibraries {
-  curl --location \
-    --progress-bar \
-    --url "$1" \
-    --output "${appdata}/deps/appengine-lib.zip"
-}
 function downloadBuildFiles {
   curl --location \
     --progress-bar \
@@ -63,12 +57,10 @@ function downloadUpgradeScript() {
 function unpackFiles {
     # Unzip the downloaded files
     unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
-    unzip -o -q "${appdata}/deps/appengine-lib.zip" -d "${appdata}/deps/appengine"
     unzip -o -q "${appdata}/deps/build.zip" -d "${appdata}/deps"
     unzip -o -q "${appdata}/deps/buildserver.zip" -d "${appdata}/deps/buildserver"
     # So we don't take a large space
     rm "${appdata}/deps/appengine.zip"
-    rm "${appdata}/deps/appengine-lib.zip"
     rm "${appdata}/deps/build.zip"
     rm "${appdata}/deps/buildserver.zip"
 }
@@ -82,7 +74,6 @@ resolveAppDataFolder
 appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
 buildDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
 buildserverDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
-appengineLibDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine-lib.json" | sed "s/\"//g")
 bindir="$HOME/.appzard/bin"
 createDirIfDoesntExist "$HOME/.appzard"
 createDirIfDoesntExist "${bindir}"
@@ -95,10 +86,6 @@ downloadAppzardExecutable
 echo -e "${green}Done!${reset}"
 echo "Downloading Appengine java SDK.."
 downloadAppengine "${appengineDownloadUrl}"
-echo -e "${green}Done!${reset}"
-# We host this separately instead of right using one compressed zip ( which is how it's served by google), to make the archives smaller.
-echo "Downloading appengine java SDK libraries.."
-downloadAppengineLibraries "${appengineLibDownloadUrl}"
 echo -e "${green}Done!${reset}"
 echo "Downloading Build files.."
 downloadBuildFiles "${buildDownloadUrl}"
