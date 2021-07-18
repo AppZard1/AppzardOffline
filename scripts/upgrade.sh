@@ -30,6 +30,12 @@ function downloadBuildFiles {
     --url "$1" \
     --output "${appdata}/deps/build.zip"
 }
+function downloadBuildserverFiles {
+  curl --location \
+    --progress-bar \
+    --url "$1" \
+    --output "${appdata}/deps/buildserver.zip"
+}
 if ! command -v COMMAND &> /dev/null
 then
   currentVersion=$(appzard -v)
@@ -37,6 +43,7 @@ then
   appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
   buildDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
   appengineLibDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine-lib.json" | sed "s/\"//g")
+  buildserverDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
   echo "Your current appzard version is ${currentVersion}"
   echo "The latest appzard version is ${latestVersion}"
   if [ "$latestVersion" == "$currentVersion" ]; then
@@ -94,6 +101,17 @@ then
         echo "Unpacking files.."
         unzip -o -q "${appdata}/deps/build.zip" -d "${appdata}/deps"
         rm "${appdata}/deps/build.zip"
+        echo -e "${green}Done!${reset}"
+      fi
+      buildserverFilesUpdated=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserverFilesUpdated.json" | sed "s/\"//g")
+      if [ "$buildserverFilesUpdated" == "true" ]; then
+        # Appzard's build files has been updated, mostly there's an appzard update
+        echo "Downloading Buildserver files.."
+        downloadBuildserverFiles "${buildserverDownloadUrl}"
+        echo -e "${green}Done!${reset}"
+        echo "Unpacking files.."
+        unzip -o -q "${appdata}/deps/buildserver.zip" -d "${appdata}/deps"
+        rm "${appdata}/deps/buildserver.zip"
         echo -e "${green}Done!${reset}"
       fi
       echo -e "${yellow}Appzard update has been completed successfully!${reset}"
