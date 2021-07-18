@@ -98,4 +98,4 @@ After you add the installation path to the PATH variable, open a new terminal ( 
 
    2- If you don't have it running on a terminal, either follow the example above to kill the process, or, if you are on windows, use CRTL + R then, write taskmgr, and kill the java processes, that should be sufficient for the instance to stop using the localhost port.
 ## Found a bug?
-Incase you found a bug, please check first it's not resulted in by a mis-confoiguration of the appzard offline tool on your computer by running `appzard doctor`, if it reports eveything is correct, even though the bug persists, please report it to our staff, either by opening a new issue in github, or a new topic on our commnity ( https://community.appzard.com )
+Incase you found a bug, please check first it's not resulted in by a mis-confoiguration of the appzard offline tool on your computer by running `appzard doctor`, if it reports eveything is correct, even though the bug persists, please report it to our staff, by opening either a new issue in github, or a new topic on our commnity ( https://community.appzard.com )
