@@ -30,6 +30,15 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   #Linux/Mac:
   bash $HOME/.appzard/scripts/upgrade.sh
   ```
+  #### Forced upgrades 
+   Sometimes, it's useful to force an update to download all the required files by appzard offline, even though you are up to date, or the update didn't require all files to be downloaded, possibly because some files haven't been downloaded successfully ( you can check this by running `appzard doctor`.).
+   To force an upgrade, you just need to add the `-f` flag, for example:
+   ```
+  #Windows:
+  bash $APPDATA/appzard/scripts/upgrade.sh -f
+  #Linux/Mac:
+  bash $HOME/.appzard/scripts/upgrade.sh -f
+  ```
 ## Uninstalling
   If you want to uninstall appzard from your computer, please delete the following directories:
   
@@ -56,7 +65,9 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   When starting a new instance you might have got a similar error: `An appzard instance is already running!`
   
   This error is typically resulted in from two situations:
+
   1- Another program is using the `8888` port, and subsequently failling to establish a connection from appzard offline.
+
   2- You have started, but didn't kill a previous appzard instance.
   
   #### If there is another program using the `8888` port on your local network
@@ -82,7 +93,9 @@ After you add the installation path to the PATH variable, open a new terminal ( 
    To kill the process, now you should be able to start an appzard instance.
    #### If another appzard instance is running
    In case you had another appzard instance running, you have to options to do:
+
    1- If you have the instance of appzard which is serving the previous appzard instance running on a terminal, use CTRL + C to kill this terminal and it's attached processes.
+
    2- If you don't have it running on a terminal, either follow the example above to kill the process, or, if you are on windows, use CRTL + R then, write taskmgr, and kill the java processes, that should be sufficient for the instance to stop using the localhost port.
 ## Found a bug?
 Incase you found a bug, please check first it's not resulted in by a mis-confoiguration of the appzard offline tool on your computer by running `appzard doctor`, if it reports eveything is correct, even though the bug persists, please report it to our staff, either by opening a new issue in github, or a new topic on our commnity ( https://community.appzard.com )
