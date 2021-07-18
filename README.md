@@ -49,5 +49,8 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   
   `/home/username/.appzard`
   
+## FAQ
+  ### Appzard offline url shows a blank screen
+  If you were redirected to the local instance url, yet it has shown a blank screen, please clear your cache and hard reload the page.
 ## Found a bug?
 Incase you found a bug, please report it to our staff, either by opening a new issue in github, or a new topic on our commnity ( https://community.appzard.com )
