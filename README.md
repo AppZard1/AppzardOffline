@@ -1,5 +1,13 @@
 # AppzardOffline
-The offline version for Appzard workspace
+The offline version for Appzard workspace, this CLI helps appzard users to establish and appzard server locally on their device, with absolutely no need for internet connection.
+## Requirments
+In order to get appzard offline to run correctly, you will need to have some softwares, which aren't served with appzard offline, installed on your computer.
+#### Java
+Java 8 is a requirement for appzard offline to start local servers, to check if java is installed on your computer, please run:
+```
+java --version
+```
+If it reports that the java command, wasn't found you will need to install it first.
 ## Installation
 You can install appzard on your device by:
 - Opening a new terminal and running:
