@@ -16,6 +16,9 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   ### - `start`
   Syntax: `appzard start`
   Starts a new appzard instance, you must not have a previous session running or have a program using 8888 port or `localhost`.
+  ### - `doctor`
+  Syntax: `appzard doctor`
+  Checks that appzard is correctly configured and up-to-date on your device, please use this command first before reposrting an issue to the support team.
 ## Available Arguments:
   - `--version` (abbr: `-v`): Displays appzard's version
   - `--help` (abbr: `-h`): Displays the help message
@@ -29,13 +32,25 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   ```
 ## Uninstalling
   If you want to uninstall appzard from your computer, please delete the following directories:
+  
   Windows:
+  
   `C:/Users/Username/AppData/Roaming/appzard`
+  
   `C:/Users/Useranme/.appzard/`
+  
   Mac:
+  
   `/home/username/.appzard`
+  
   `/home/username/Library/Application Support`
+  
   Linux:
+  
   `/home/username/.appzard`
+  
+## FAQ
+  ### Appzard offline url shows a blank screen
+  If you were redirected to the local instance url, yet it has shown a blank screen, please clear your cache and hard reload the page.
 ## Found a bug?
 Incase you found a bug, please report it to our staff, either by opening a new issue in github, or a new topic on our commnity ( https://community.appzard.com )
