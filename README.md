@@ -5,9 +5,14 @@ In order to get appzard offline to run correctly, you will need to have some sof
 #### Java
 Java 8 is a requirement for appzard offline to start local servers, to check if java is installed on your computer, please run:
 ```
-java --version
+java -version
 ```
 If it reports that the java command, wasn't found you will need to install it first.
+#### System Requirments
+To be able to use appzard, your system needs to:
+- Have at least 1.5 GB
+- Have at least 2 GM RAM
+- Have your OS Linux or Windows, MacOS isn't officially supported as of now.  
 ## Installation
 You can install appzard on your device by:
 - Opening a new terminal and running:
@@ -69,6 +74,11 @@ After you add the installation path to the PATH variable, open a new terminal ( 
 ## FAQ
   ### Appzard offline url shows a blank screen
   If you were redirected to the local instance url, yet it has shown a blank screen, please clear your cache and hard reload the page.
+  ### Does Appzard offline requires an internet connection anytime?
+  The advantage of appzard offline is to be able to run appzard workspace locally without internet connection. However, some other functions require internet connection to work properly:
+  - Installation: installing appzard requires internet connection to download installation files from the cloud.
+  - Upgrade: upgrading appzard requires internet connection, to check the latest version, and download the updated files.
+  - `appzard doctor`: appzard doctor requires internet connection, to check the latest version of appzard.
   ### How to stop appzard offline instance
   When starting a new instance you might have got a similar error: `An appzard instance is already running!`
   
