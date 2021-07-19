@@ -70,9 +70,13 @@ done
           appdata="$HOME/.appzard"
       fi
       echo "Downloading Appzard executable.."
+      executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard"
+      if [ "$platform" == "windows" ]; then
+        executableURL="$executableURL.exe"
+      fi
       curl --location \
         --progress-bar \
-        --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard" \
+        --url $executableURL \
         --output "${bindir}/appzard"
         echo -e "${green}Done!${reset}"
       forcedUpdate=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/forcedUpdate.json" | sed "s/\"//g")
