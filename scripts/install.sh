@@ -27,12 +27,16 @@ function createDirIfDoesntExist {
 function downloadAppzardExecutable {
   executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard"
   if [ "$platform" == "windows" ]; then
-    executableURL="$executableURL.exe"
-  fi
-  curl --location \
+    curl --location \
     --progress-bar \
-    --url $executableURL \
+    --url "$executableURL.exe" \
+    --output "${bindir}/appzard.exe"
+  else
+    curl --location \
+    --progress-bar \
+    --url "$executableURL" \
     --output "${bindir}/appzard"
+  fi
 }
 function downloadAppengine {
   curl --location \
@@ -60,7 +64,7 @@ function downloadUpgradeScript() {
 }
 function unpackFiles {
     # Unzip the downloaded files
-    unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps/appengine"
+    unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
     unzip -o -q "${appdata}/deps/build.zip" -d "${appdata}/deps"
     unzip -o -q "${appdata}/deps/buildserver.zip" -d "${appdata}/deps/buildserver"
     # So we don't take a large space

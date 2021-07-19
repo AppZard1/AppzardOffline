@@ -77,13 +77,17 @@ done
       echo "Downloading Appzard executable.."
       executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard"
       if [ "$platform" == "windows" ]; then
-        executableURL="$executableURL.exe"
-      fi
-      curl --location \
+        curl --location \
         --progress-bar \
-        --url $executableURL \
+        --url "$executableURL.exe" \
+        --output "${bindir}/appzard.exe"
+      else
+        curl --location \
+        --progress-bar \
+        --url "$executableURL" \
         --output "${bindir}/appzard"
-        echo -e "${green}Done!${reset}"
+      fi
+      echo -e "${green}Done!${reset}"
       forcedUpdate=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/forcedUpdate.json" | sed "s/\"//g")
       if [ "$forcedUpdate" == "true" ] || [ "$forceUpgrade" == "-f" ]; then
         # a forced update requires downloading the appengine files again
@@ -91,7 +95,7 @@ done
         downloadAppengine "${appengineDownloadUrl}"
         echo -e "${green}Done!${reset}"
         echo "Unpacking files.."
-        unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps/appengine"
+        unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
         rm "${appdata}/deps/appengine.zip"
         echo -e "${green}Done!${reset}"
       fi
