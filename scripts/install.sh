@@ -25,9 +25,13 @@ function createDirIfDoesntExist {
     fi
 }
 function downloadAppzardExecutable {
+  executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard"
+  if [ "$platform" == "windows" ]; then
+    executableURL="$executableURL.exe"
+  fi
   curl --location \
     --progress-bar \
-    --url "https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard" \
+    --url $executableURL \
     --output "${bindir}/appzard"
 }
 function downloadAppengine {
@@ -79,7 +83,6 @@ createDirIfDoesntExist "$HOME/.appzard"
 createDirIfDoesntExist "${bindir}"
 createDirIfDoesntExist "${appdata}"
 createDirIfDoesntExist "${appdata}/deps"
-createDirIfDoesntExist "${appdata}/buildserver"
 createDirIfDoesntExist "${appdata}/scripts"
 echo "Downloading Appzard executable.."
 downloadAppzardExecutable
