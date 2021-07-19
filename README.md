@@ -5,7 +5,7 @@ In order to get appzard offline to run correctly, you will need to have some sof
 #### Java
 Java 8 is a requirement for appzard offline to start local servers, to check if java is installed on your computer, please run:
 ```
-java --version
+java -version
 ```
 If it reports that the java command, wasn't found you will need to install it first.
 ## Installation
