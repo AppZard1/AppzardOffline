@@ -49,8 +49,13 @@ done
   if [ "$latestVersion" == "$currentVersion" ] && [ ! "$forceUpgrade" == "-f" ]; then
     echo -e "${green}You are up to date!${reset}"
   else
-    echo -e "${yellow}An appzard update is available!${reset}"
-    read -p "Do you want to update appzard to the latest version? (Y / n): " response
+    if [ "$forceUpgrade" == "-f" ] && [ "$currentVersion" == "$latestVersion" ]; then
+      echo -e "${yellow}No Appzard update is available, starting a forced update..${reset}"
+      read -p "Do you want to force update appzard? (Y / n): " response
+    else
+      echo -e "${yellow}An Appzard update is available!${reset}"
+      read -p "Do you want to update appzard to the latest version? (Y / n): " response
+    fi
     if [ "$response" == "Y" ]; then
       echo "Starting Appzard update.."
       bindir="$HOME/.appzard/bin"
