@@ -60,7 +60,7 @@ function downloadUpgradeScript() {
 }
 function unpackFiles {
     # Unzip the downloaded files
-    unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
+    unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps/appengine"
     unzip -o -q "${appdata}/deps/build.zip" -d "${appdata}/deps"
     unzip -o -q "${appdata}/deps/buildserver.zip" -d "${appdata}/deps/buildserver"
     # So we don't take a large space

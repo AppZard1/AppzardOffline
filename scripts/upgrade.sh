@@ -91,7 +91,7 @@ done
         downloadAppengine "${appengineDownloadUrl}"
         echo -e "${green}Done!${reset}"
         echo "Unpacking files.."
-        unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps"
+        unzip -o -q "${appdata}/deps/appengine.zip" -d "${appdata}/deps/appengine"
         rm "${appdata}/deps/appengine.zip"
         echo -e "${green}Done!${reset}"
       fi
