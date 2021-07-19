@@ -11,7 +11,7 @@ If it reports that the java command, wasn't found you will need to install it fi
 #### System Requirments
 To be able to use appzard, your system needs to:
 - Have at least 1.5 GB
-- Have at least 2 GM RAM
+- Have at least 2 GB RAM
 - Have your OS Linux or Windows, MacOS isn't officially supported as of now.  
 ## Installation
 You can install appzard on your device by:
