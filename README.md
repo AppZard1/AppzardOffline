@@ -14,7 +14,7 @@ To be able to use appzard, your system needs to:
 - Have at least 2 GB RAM
 - Have your OS Linux or Windows, MacOS isn't officially supported as of now.  
 ## Installation
-Note: A more detailed documentation can be found [here] https://community.appzard.com/t/how-to-install-appzard-offline/376?u=mohamedtamer).
+Note: A more detailed documentation can be found [here](https://community.appzard.com/t/how-to-install-appzard-offline/376?u=mohamedtamer).
 You can install appzard on your device by:
 - Opening a new terminal and running:
  
