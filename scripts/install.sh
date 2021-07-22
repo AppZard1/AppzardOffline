@@ -90,6 +90,11 @@ createDirIfDoesntExist "${appdata}/deps"
 createDirIfDoesntExist "${appdata}/scripts"
 echo "Downloading Appzard executable.."
 downloadAppzardExecutable
+if [ "$platform" == "windows" ]; then
+  chmod +x "$bindir/appzard.exe"
+else
+  chmod +x "$bindir/appzard"
+fi
 echo -e "${green}Done!${reset}"
 echo "Downloading Appengine java SDK.."
 downloadAppengine "${appengineDownloadUrl}"
