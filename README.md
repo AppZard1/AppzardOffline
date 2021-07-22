@@ -1,7 +1,7 @@
 # AppzardOffline
 The offline version for Appzard workspace, this CLI helps appzard users to establish and appzard server locally on their device, with absolutely no need for internet connection.
 ## Requirments
-In order to get appzard offline to run correctly, you will need to have some softwares, which aren't served with appzard offline, installed on your computer.
+To get Appzard offline to run correctly, you will need to have some software, which isn't served with appzard offline, installed on your computer.
 #### Java
 Java 8 is a requirement for appzard offline to start local servers, to check if java is installed on your computer, please run:
 ```
@@ -12,7 +12,7 @@ If it reports that the java command, wasn't found you will need to install it fi
 To be able to use appzard, your system needs to:
 - Have at least 800MB
 - Have at least 2 GB RAM
-- Have your OS Linux or Windows, MacOS isn't officially supported as of now.  
+- Have your OS Linux or Windows, macOS isn't officially supported as of now.  
 ## Installation
 Note: A more detailed documentation can be found [here](https://community.appzard.com/t/how-to-install-appzard-offline/376?u=mohamedtamer).
 You can install appzard on your device by:
@@ -22,9 +22,9 @@ You can install appzard on your device by:
 curl -s https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/scripts/install.sh | bash
 ```
 And wait for the installation to finish.
-After the installation is complete you should get a simmilar message:
+After the installation is complete you should get a similar message:
 `Appzard has been successfully installed on your device! Please add this path: {PATH} to your PATH environment variable, then run appzard -v to verify the installation.`
-Copy the path in the message, and add it in the PATH environment variable, in order to be able to run the `appzard` command.
+Copy the path in the message, and add it to the PATH environment variable, to be able to run the `Appzard` command.
 After you add the installation path to the PATH variable, open a new terminal ( or restart your terminal ), then run `appzard -v` to verify the installation has succeeded.
 ## Available Commands
   ### - `start`
@@ -32,12 +32,12 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   Starts a new appzard instance, you must not have a previous session running or have a program using 8888 port or `localhost`.
   ### - `doctor`
   Syntax: `appzard doctor`
-  Checks that appzard is correctly configured and up-to-date on your device, please use this command first before reposrting an issue to the support team.
+  Checks that appzard is correctly configured and up-to-date on your device, please use this command first before reporting an issue to the support team.
 ## Available Arguments:
-  - `--version` (abbr: `-v`): Displays appzard's version
+  - `--version` (abbr: `-v`): Displays Appzard's version
   - `--help` (abbr: `-h`): Displays the help message
 ## Upgrading
-  Upgrades are periodially released for this service, to upgrade appzard to the latest version, please run:
+  Upgrades are periodically released for this service, to upgrade appzard to the latest version, please run:
   ```
   #Windows:
   bash $APPDATA/appzard/scripts/upgrade.sh
@@ -58,7 +58,7 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   
   Windows:
   
-  `C:/Users/Username/AppData/Roaming/appzard`
+  `C:/Users/Username/AppData/Roaming/Appzard`
   
   `C:/Users/Useranme/.appzard/`
   
@@ -73,19 +73,19 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   `/home/username/.appzard`
   
 ## FAQ
-  ### Appzard offline url shows a blank screen
-  If you were redirected to the local instance url, yet it has shown a blank screen, please clear your cache and hard reload the page.
+  ### Appzard offline URL shows a blank screen
+  If you were redirected to the local instance URL, yet it has shown a blank screen, please clear your cache and hard reload the page.
   ### Does Appzard offline requires an internet connection anytime?
-  The advantage of appzard offline is to be able to run appzard workspace locally without internet connection. However, some other functions require internet connection to work properly:
-  - Installation: installing appzard requires internet connection to download installation files from the cloud.
-  - Upgrade: upgrading appzard requires internet connection, to check the latest version, and download the updated files.
-  - `appzard doctor`: appzard doctor requires internet connection, to check the latest version of appzard.
+  The advantage of appzard offline is to be able to run appzard workspace locally without an internet connection. However, some other functions require an internet connection to work properly:
+  - Installation: installing Appzard requires an internet connection to download installation files from the cloud.
+  - Upgrade: upgrading appzard requires an internet connection, to check the latest version, and download the updated files.
+  - `appzard doctor`: appzard doctor requires an internet connection, to check the latest version of appzard.
   ### How to stop appzard offline instance
   When starting a new instance you might have got a similar error: `An appzard instance is already running!`
   
-  This error is typically resulted in from two situations:
+  This error typically results in two situations:
 
-  1- Another program is using the `8888` port, and subsequently failling to establish a connection from appzard offline.
+  1- Another program is using the `8888` port, and subsequently failing to establish a connection from appzard offline.
 
   2- You have started, but didn't kill a previous appzard instance.
   
@@ -94,17 +94,17 @@ After you add the installation path to the PATH variable, open a new terminal ( 
    ```
    netstat -ano | findstr :8888
    ```
-   In your prefered terminal, you will get a simmilar output:
+   In your prefered terminal, you will get a similar output:
    ```
     TCP    0.0.0.0:8888           0.0.0.0:0              LISTENING       17692
     TCP    YOUR_LOCAL_IP:60121        127.0.0.1:8888         TIME_WAIT       0
     TCP    YOUR_LOCAL_IP:63783        127.0.0.1:8888         TIME_WAIT       0
     ...
    ```
-   The last item in each line is the process PID, for example `17692`, we will use this to kill the process.
+   The last item in each line is the process PID, for example, `17692`, we will use this to kill the process.
    Now, run:
    ```
-   # On windows CMD
+   # On Windows CMD
    taskkill /PID 17692 /F
    # On gitbash terminal
    tskill 17692
@@ -113,8 +113,8 @@ After you add the installation path to the PATH variable, open a new terminal ( 
    #### If another appzard instance is running
    In case you had another appzard instance running, you have to options to do:
 
-   1- If you have the instance of appzard which is serving the previous appzard instance running on a terminal, use CTRL + C to kill this terminal and it's attached processes.
+   1- If you have the instance of appzard which is serving the previous appzard instance running on a terminal, use CTRL + C to kill this terminal and its attached processes.
 
    2- If you don't have it running on a terminal, either follow the example above to kill the process, or, if you are on windows, use CRTL + R then, write taskmgr, and kill the java processes, that should be sufficient for the instance to stop using the localhost port.
 ## Found a bug?
-Incase you found a bug, please check first it's not resulted in by a mis-confoiguration of the appzard offline tool on your computer by running `appzard doctor`, if it reports eveything is correct, even though the bug persists, please report it to our staff, by opening either a new issue in github, or a new topic on our commnity ( https://community.appzard.com )
+In case you found a bug, please check first it's not resulted in by a misconfiguration of the appzard offline tool on your computer by running `appzard doctor`, if it reports everything is correct, even though the bug persists, please report it to our staff, by opening either a new issue in GitHub or a new topic on our community ( https://community.appzard.com )
