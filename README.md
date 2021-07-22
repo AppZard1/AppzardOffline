@@ -98,7 +98,7 @@ After you add the installation path to the PATH variable, open a new terminal ( 
    ```
     TCP    0.0.0.0:8888           0.0.0.0:0              LISTENING       17692
     TCP    YOUR_LOCAL_IP:60121        127.0.0.1:8888         TIME_WAIT       0
-    TCP    YOUR_LOCAL_IP:63783        127.0.0.1:88Windows88         TIME_WAIT       0
+    TCP    YOUR_LOCAL_IP:63783        127.0.0.1:8888         TIME_WAIT       0
     ...
    ```
    The last item in each line is the process PID, for example, `17692`, we will use this to kill the process.
