@@ -83,7 +83,7 @@ After you add the installation path to the PATH variable, open a new terminal ( 
   ### How to stop appzard offline instance
   When starting a new instance you might have got a similar error: `An appzard instance is already running!`
   
-  This error typically results in two situations:
+  This error is typically caused by two situations:
 
   1- Another program is using the `8888` port, and subsequently failing to establish a connection from appzard offline.
 
