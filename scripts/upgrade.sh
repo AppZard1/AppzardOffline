@@ -6,6 +6,7 @@ yellow="\033[33m"
 reset="\033[0m"
 currentVersion="0"
 latestVersion="1"
+linuxarch="x64"
 function createDirIfDoesntExist {
     if [ ! -d "$1" ]; then
       mkdir "$1"
@@ -29,6 +30,14 @@ function downloadBuildserverFiles {
     --progress-bar \
     --url "$1" \
     --output "${appdata}/deps/buildserver.zip"
+}
+function resolveLinuxArch {
+    arch=$(uname -m)
+    if [ "$arch" == "x86_64" ]; then
+      linuxarch="x64"
+    elif [ "$arch" == "aarch64" ]; then
+      linuxarch="aarch64"
+    fi
 }
 if ! command -v COMMAND &> /dev/null
 then
@@ -65,6 +74,7 @@ done
         darwin*)  platform="mac" ;;
         linux*)   platform="linux" ;;
         msys*)    platform="windows" ;;
+        cygwin*)    platform="windows" ;;
         *)        echo "The platform type: $OSTYPE couldn't be resolved to a valid operating system!" && exit 1 ;;
       esac
       if [ $platform == "windows" ]; then
@@ -75,16 +85,21 @@ done
           appdata="$HOME/.appzard"
       fi
       echo "Downloading Appzard executable.."
-      executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard"
+      executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}"
       if [ "$platform" == "windows" ]; then
         curl --location \
         --progress-bar \
-        --url "$executableURL.exe" \
+        --url "$executableURL/appzard.exe" \
         --output "${bindir}/appzard.exe"
+      elif [ "$platform" == "linux" ]; then
+        curl --location \
+        --progress-bar \
+        --url "$executableURL/$linuxarch/appzard" \
+        --output "${bindir}/appzard"
       else
         curl --location \
         --progress-bar \
-        --url "$executableURL" \
+        --url "$executableURL/appzard" \
         --output "${bindir}/appzard"
       fi
       echo -e "${green}Done!${reset}"

@@ -3,20 +3,31 @@ set -e
 platform="unknown"
 appdata=""
 bindir=""
+linuxarch="x64"
 function resolvePlatform {
     case "$OSTYPE" in
       linux*)   platform="linux" ;;
+      darwin*)   platform="mac" ;;
       msys*)    platform="windows" ;;
+      cygwin*)  platform="windows" ;;
       *)        echo "The platform type: $OSTYPE couldn't be resolved as a valid platform!" && exit 1 ;;
     esac
 }
 function resolveAppDataFolder {
     if [ $platform == "windows" ]; then
         appdata="$APPDATA/appzard"
-    elif [ $platform = "MAC" ]; then
+    elif [ $platform = "mac" ]; then
         appdata="$HOME/Library/Application/Appzard"
     elif [ $platform == "linux" ]; then
         appdata="$HOME/.appzard"
+    fi
+}
+function resolveLinuxArch {
+    arch=$(uname -m)
+    if [ "$arch" == "x86_64" ]; then
+      linuxarch="x64"
+    elif [ "$arch" == "aarch64" ]; then
+      linuxarch="aarch64"
     fi
 }
 function createDirIfDoesntExist {
@@ -25,16 +36,21 @@ function createDirIfDoesntExist {
     fi
 }
 function downloadAppzardExecutable {
-  executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}/appzard"
+  executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}"
   if [ "$platform" == "windows" ]; then
     curl --location \
     --progress-bar \
-    --url "$executableURL.exe" \
+    --url "$executableURL/appzard.exe" \
     --output "${bindir}/appzard.exe"
+  elif [ "$platform" == "linux" ]; then
+    curl --location \
+    --progress-bar \
+    --url "$executableURL/$linuxarch/appzard" \
+    --output "${bindir}/appzard"
   else
     curl --location \
     --progress-bar \
-    --url "$executableURL" \
+    --url "$executableURL/appzard" \
     --output "${bindir}/appzard"
   fi
 }
@@ -79,6 +95,9 @@ reset="\033[0m"
 echo "Starting Appzard installation.."
 resolvePlatform
 resolveAppDataFolder
+if [ $platform == "linux" ]; then
+  resolveLinuxArch
+fi
 appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
 buildDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
 buildserverDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
@@ -90,6 +109,11 @@ createDirIfDoesntExist "${appdata}/deps"
 createDirIfDoesntExist "${appdata}/scripts"
 echo "Downloading Appzard executable.."
 downloadAppzardExecutable
+if [ "$platform" == "windows" ]; then
+  chmod +x "$bindir/appzard.exe"
+else
+  chmod +x "$bindir/appzard"
+fi
 echo -e "${green}Done!${reset}"
 echo "Downloading Appengine java SDK.."
 downloadAppengine "${appengineDownloadUrl}"
