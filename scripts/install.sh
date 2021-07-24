@@ -40,6 +40,7 @@ function downloadAppzardExecutable {
   if [ "$platform" == "windows" ]; then
     curl --location \
     --progress-bar \
+    --create-dirs
     --url "$executableURL/appzard.exe" \
     --output "${bindir}/appzard.exe"
   elif [ "$platform" == "linux" ]; then
