@@ -102,6 +102,11 @@ done
         --url "$executableURL/appzard" \
         --output "${bindir}/appzard"
       fi
+      if [ "$platform" == "windows" ]; then
+        chmod +x "$bindir/appzard.exe"
+      else
+        chmod +x "$bindir/appzard"
+      fi
       echo -e "${green}Done!${reset}"
       forcedUpdate=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/forcedUpdate.json" | sed "s/\"//g")
       if [ "$forcedUpdate" == "true" ] || [ "$forceUpgrade" == "-f" ]; then
