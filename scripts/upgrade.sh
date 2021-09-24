@@ -14,19 +14,19 @@ function createDirIfDoesntExist {
 }
 
 function downloadAppengine {
-  curl --location \
+  curl -k --location \
     --progress-bar \
     --url "$1" \
     --output "${appdata}/deps/appengine.zip"
 }
 function downloadBuildFiles {
-  curl --location \
+  curl -k --location \
     --progress-bar \
     --url "$1" \
     --output "${appdata}/deps/build.zip"
 }
 function downloadBuildserverFiles {
-  curl --location \
+  curl -k --location \
     --progress-bar \
     --url "$1" \
     --output "${appdata}/deps/buildserver.zip"
@@ -49,10 +49,10 @@ then
 done
   echo "Initializing upgrade.."
   currentVersion=$(appzard -v)
-  latestVersion=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/version.json" | sed "s/\"//g")
-  appengineDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
-  buildDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
-  buildserverDownloadUrl=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
+  latestVersion=$(curl -k -s "https://appzardoffline-default-rtdb.firebaseio.com/version.json" | sed "s/\"//g")
+  appengineDownloadUrl=$(curl -k -s "https://appzardoffline-default-rtdb.firebaseio.com/appengine.json" | sed "s/\"//g")
+  buildDownloadUrl=$(curl -k -s "https://appzardoffline-default-rtdb.firebaseio.com/build.json" | sed "s/\"//g")
+  buildserverDownloadUrl=$(curl -k -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserver.json" | sed "s/\"//g")
   echo "Your current appzard version is ${currentVersion}"
   echo "The latest appzard version is ${latestVersion}"
   if [ "$latestVersion" == "$currentVersion" ] && [ ! "$forceUpgrade" == "-f" ]; then
@@ -87,17 +87,17 @@ done
       echo "Downloading Appzard executable.."
       executableURL="https://raw.githubusercontent.com/AppZard1/AppzardOffline/main/bin/${platform}"
       if [ "$platform" == "windows" ]; then
-        curl --location \
+        curl -k --location \
         --progress-bar \
         --url "$executableURL/appzard.exe" \
         --output "${bindir}/appzard.exe"
       elif [ "$platform" == "linux" ]; then
-        curl --location \
+        curl -k --location \
         --progress-bar \
         --url "$executableURL/$linuxarch/appzard" \
         --output "${bindir}/appzard"
       else
-        curl --location \
+        curl -k -location \
         --progress-bar \
         --url "$executableURL/appzard" \
         --output "${bindir}/appzard"
@@ -108,7 +108,7 @@ done
         chmod +x "$bindir/appzard"
       fi
       echo -e "${green}Done!${reset}"
-      forcedUpdate=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/forcedUpdate.json" | sed "s/\"//g")
+      forcedUpdate=$(curl -k -s "https://appzardoffline-default-rtdb.firebaseio.com/forcedUpdate.json" | sed "s/\"//g")
       if [ "$forcedUpdate" == "true" ] || [ "$forceUpgrade" == "-f" ]; then
         # a forced update requires downloading the appengine files again
         echo "Downloading Appengine java SDK.."
@@ -119,7 +119,7 @@ done
         rm "${appdata}/deps/appengine.zip"
         echo -e "${green}Done!${reset}"
       fi
-      buildFilesUpdated=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildFilesUpdated.json" | sed "s/\"//g")
+      buildFilesUpdated=$(curl -k -s "https://appzardoffline-default-rtdb.firebaseio.com/buildFilesUpdated.json" | sed "s/\"//g")
       if [ "$buildFilesUpdated" == "true" ] || [ "$forceUpgrade" == "-f" ]; then
         # Appzard's build files has been updated, mostly there's an appzard update
         echo "Downloading Build files.."
@@ -130,7 +130,7 @@ done
         rm "${appdata}/deps/build.zip"
         echo -e "${green}Done!${reset}"
       fi
-      buildserverFilesUpdated=$(curl -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserverFilesUpdated.json" | sed "s/\"//g")
+      buildserverFilesUpdated=$(curl -k -s "https://appzardoffline-default-rtdb.firebaseio.com/buildserverFilesUpdated.json" | sed "s/\"//g")
       if [ "$buildserverFilesUpdated" == "true" ] || [ "$forceUpgrade" == "-f" ]; then
         # Appzard's build files has been updated, mostly there's an appzard update
         echo "Downloading Buildserver files.."
